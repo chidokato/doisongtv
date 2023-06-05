@@ -35,14 +35,14 @@
                         <tbody>
                             @foreach($post as $val)
                             <tr>
-                                <td>{{$val->post->id}}</td>
+                                <td>{{$val->id}}</td>
                                 <td>{{$val->name}}</td>
                                 <td>{{$val->status}}</td>
-                                <td>{{$val->post->sort_by}}</td>
+                                <td>{{$val->sort_by}}</td>
                                 <td>{{$val->updated_at}}</td>
                                 <td style="display: flex;">
-                                    <a href="{{route('post.edit',[$val->post_id])}}" class="mr-2"><i class="fas fa-edit" aria-hidden="true"></i></a>
-                                    <form action="{{route('post.destroy', [$val->post->id])}}" method="POST">
+                                    <a href="{{route('post.edit',[$val->id])}}" class="mr-2"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                    <form action="{{route('post.destroy', [$val->id])}}" method="POST">
                                       @method('DELETE')
                                       @csrf
                                       <button class="button_none" onclick="return confirm('Bạn muốn xóa bản ghi ?')"><i class="fas fa-trash-alt"></i></button>

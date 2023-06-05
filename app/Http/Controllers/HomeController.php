@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\Setting;
 
 // $locale = App::currentLocale();
@@ -43,8 +44,7 @@ class HomeController extends Controller
     public function contact()
     {
         $locale = App::currentLocale();
-        $category = CategoryTranslation::join('categories', 'categories.id', '=', 'category_translations.category_id')
-            ->where('locale', $locale)->where('parent', 0)
+        $category = Category::where('parent', 0)
             ->select('category_translations.*')->orderBy('categories.view', 'asc')->get();
         return view('pages.contact', [
             'category'=>$category,
@@ -53,76 +53,37 @@ class HomeController extends Controller
 
     public function category($slug)
     {
-        $locale = App::currentLocale();
-        $category = CategoryTranslation::join('categories', 'categories.id', '=', 'category_translations.category_id')
-            ->where('locale', $locale)->where('parent', 0)
-            ->select('category_translations.*')->orderBy('categories.view', 'asc')->get();
-        // end
-
-        $data = CategoryTranslation::join('categories', 'categories.id', '=', 'category_translations.category_id')
-            ->select('category_translations.*')
-            ->where('slug', $slug)
-            ->where('locale', $locale)->first();
-
+        $data = Category::where('slug', $slug)->first();
         // cat_array
         $cat_array = [$data["id"]];
-        $cates = CategoryTranslation::where('parent', $data["id"])->get();
+        $cates = Category::where('parent', $data["id"])->get();
         foreach ($cates as $key => $cate) {
             $cat_array[] = $cate->id;
         }
         // cat_array
 
-        if ($data->category->sort_by == 'Product') {
-            $post = PostTranslation::whereIn('category_tras_id', $cat_array)
-                ->where('locale', $locale)
-                ->orderBy('id', 'desc')->paginate(18);
-            return view('pages.category', compact(
-                'category',
+        if ($data->sort_by == 'News') {
+            $post = Post::whereIn('category_id', $cat_array)->orderBy('id', 'desc')->paginate(18);
+            return view('pages.news', compact(
                 'data',
                 'post'
-            ));
-        }elseif($data->category->sort_by == 'News'){
-            $post = PostTranslation::whereIn('category_tras_id', $cat_array)
-                ->where('locale', $locale)
-                ->orderBy('id', 'desc')->paginate(7);
-            return view('pages.news', compact(
-                'category',
-                'data',
-                'post',
             ));
         }
     }
 
     public function post($catslug, $slug)
     {
-        $locale = App::currentLocale();
-        $category = CategoryTranslation::join('categories', 'categories.id', '=', 'category_translations.category_id')
-            ->where('locale', $locale)->where('parent', 0)
-            ->select('category_translations.*')->orderBy('categories.view', 'asc')->get(); //menu
-        $post = PostTranslation::join('posts', 'posts.id', '=', 'post_translations.post_id')
-            ->where('locale', $locale)
-            ->select('post_translations.*')
-            ->where('posts.slug', $slug)
-            ->first();
-        $related_post = PostTranslation::join('posts', 'posts.id', '=', 'post_translations.post_id')
-            ->where('category_tras_id', $post->category_tras_id)
-            ->where('locale', $locale)
-            ->get();
-        if ($post->post->sort_by == 'Product') {
-            $images = Images::where('post_id', $post->post->id)->get();
-            $section = SectionTranslation::where('locale', $locale)->where('post_id', $post->post->id)->orderBy('view', 'asc')->get();
+        $post = Post::where('posts.slug', $slug)->first();
+        $related_post = Post::where('category_id', $post->category_id)->get();
+        if ($post->sort_by == 'Product') {
             return view('pages.project', compact(
-                'category',
                 'post',
-                'images',
-                'section',
-                'catslug',
                 'related_post',
             ));
-        }elseif ($post->post->sort_by == 'News') {
+        }elseif ($post->sort_by == 'News') {
             return view('pages.post', compact(
-                'category',
                 'post',
+                'related_post',
             ));
         }
         

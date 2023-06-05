@@ -2,7 +2,7 @@
 
 @section('content')
 @include('admin.alert')
-<?php use App\Models\CategoryTranslation; ?>
+<?php use App\Models\Category; ?>
 <form method="post" action="{{route('post.store')}}" enctype="multipart/form-data">
 @csrf
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed">
@@ -57,8 +57,8 @@
             <div class="card-header d-flex flex-row align-items-center justify-content-between">
                 <ul class="nav nav-pills">
                     <li><a data-toggle="tab" class="nav-link active" href="#vi">Tiếng Việt</a></li>
-                    <li><a data-toggle="tab" class="nav-link" href="#en">Tiếng Anh</a></li>
-                    <li><a data-toggle="tab" class="nav-link" href="#cn">Tiếng Trung</a></li>
+                   <!--  <li><a data-toggle="tab" class="nav-link" href="#en">Tiếng Anh</a></li>
+                    <li><a data-toggle="tab" class="nav-link" href="#cn">Tiếng Trung</a></li> -->
                 </ul>
             </div>
             <div class="tab-content overflow">
@@ -68,103 +68,31 @@
                           <div class="col-md-12">
                               <div class="form-group">
                                   <label>Name</label>
-                                  <input name="name:vi" placeholder="..." type="text" class="form-control">
+                                  <input name="name" placeholder="..." type="text" class="form-control">
                               </div>
                           </div>
                           <div class="col-md-12">
                               <div class="form-group">
                                   <label>Sort description</label>
-                                  <textarea rows="4" name="detail:vi" class="form-control"></textarea>
+                                  <textarea rows="4" name="detail" class="form-control"></textarea>
                               </div>
                           </div>
                           <div class="col-md-12">
                               <div class="form-group">
                                   <label>Content</label>
-                                  <textarea name="content:vi" class="form-control" id="ckeditor"></textarea>
+                                  <textarea name="content" class="form-control" id="ckeditor"></textarea>
                               </div>
                           </div>
                           <div class="col-md-12">
                               <div class="form-group">
                                   <label>Title</label>
-                                  <input name="title:vi" placeholder="..." type="text" class="form-control">
+                                  <input name="title" placeholder="..." type="text" class="form-control">
                               </div>
                           </div>
                           <div class="col-md-12">
                               <div class="form-group">
                                   <label>Description</label>
-                                  <input name="description:vi" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="en">
-                  <div class="card-body">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Name</label>
-                                  <input name="name:en" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Sort description</label>
-                                  <textarea rows="4" name="detail:en" class="form-control"></textarea>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Content</label>
-                                  <textarea name="content:en" class="form-control" id="ckeditor1"></textarea>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Title</label>
-                                  <input name="title:en" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Description</label>
-                                  <input name="description:en" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="cn">
-                  <div class="card-body">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Name</label>
-                                  <input name="name:cn" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Sort description</label>
-                                  <textarea rows="4" name="detail:cn" class="form-control"></textarea>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Content</label>
-                                  <textarea name="content:cn" class="form-control" id="ckeditor2"></textarea>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Title</label>
-                                  <input name="title:cn" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Description</label>
-                                  <input name="description:cn" placeholder="..." type="text" class="form-control">
+                                  <input name="description" placeholder="..." type="text" class="form-control">
                               </div>
                           </div>
                       </div>
@@ -182,14 +110,10 @@
             <div class="card-body">
                 <div class="form-group">
                     <label class="">Danh mục</label>
-                    <select name='parent' class="form-control select2" id="parent">
+                    <select name='category_id' class="form-control select2" id="parent">
                       <option value="">--Chọn danh mục--</option>
                       @foreach($category as $val)
-                        <option value="{{$val->category->id}}">{{$val->name}}</option>
-                        <?php $subs = CategoryTranslation::where('parent', $val->id)->get(); ?>
-                        @foreach($subs as $sub)
-                        <option value="{{$sub->category->id}}">--{{$sub->name}}</option>
-                        @endforeach
+                        <option value="{{$val->id}}">{{$val->name}}</option>
                       @endforeach
                     </select>
                     <div id="list_parent"></div>
