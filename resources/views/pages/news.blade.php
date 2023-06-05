@@ -19,11 +19,11 @@
                     <div class="col-lg-4">
                         <div class="media-post-wrap">
                             <div class="thumb mb-2">
-                                <a href="{{$val->category->slug}}/{{$val->slug}}"><img src="frontend/img/blog/business-people.jpg" alt="img"></a>
-                                <a class="tag top-right tag-green" href="{{$val->category->slug}}">Travel</a>
+                                <a href="{{$val->category->slug}}/{{$val->slug}}"><img src="data/news/{{$val->img}}" alt="{{$val->name}}"></a>
+                                <a class="tag top-right tag-green" href="{{$val->category->slug}}">{{$data->name}}</a>
                             </div>
                             <div class="media-body ms-0">
-                                <h4><a href="{{$val->category->slug}}/{{$val->slug}}">In the news: small businesses for expect revenue growth in 2022.</a></h4>
+                                <h4><a href="{{$val->category->slug}}/{{$val->slug}}">{{$val->name}}</a></h4>
                             </div>
                         </div>
                     </div>
