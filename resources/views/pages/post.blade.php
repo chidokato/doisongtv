@@ -14,6 +14,9 @@
                 <div class="section-title">
                     <h4 class="title left-line">{{$post->name}}</h4>
                 </div>
+                <div class="content">
+                    {!!$post->content!!}
+                </div>
             </div>
             <div class="col-lg-4">
                 <div class="section-title">
