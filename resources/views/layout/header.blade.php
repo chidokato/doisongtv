@@ -22,7 +22,7 @@
     <div class="navbar-area">
         <nav class="navbar navbar-expand-lg">
             <div class="container nav-container">
-                <a class="main-logo" href="{{asset('')}}"><img src="frontend/img/logo.png" alt="img"></a>
+                <a class="main-logo" href="{{asset('')}}"><img src="frontend/img/logo1.png" alt="img"></a>
                 <div class="responsive-mobile-menu">
                     <!-- <div class="logo d-lg-none d-block">
                         <a class="main-logo" href="home.html"><img src="frontend/img/logo.png" alt="img"></a>
