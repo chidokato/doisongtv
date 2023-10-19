@@ -65,13 +65,10 @@ class AjaxController extends Controller
         }
     }
 
-    public function change_SortBy($sort_by)
+    public function change_SortBy($id)
     {
-        $data = Category::where('sort_by',$sort_by)->where('parent','0')->get();
-            echo '<option value="0"> --Root-- </option>';
-        foreach ($data as $key => $value) {
-            echo '<option value="'.$value->id.'">'.$value->name.'</option>';
-        }
+        $data = Category::where('sort_by',$id)->get();
+        return view('admin.category.listparent',['data'=>$data]);
     }
 
     public function change_parent($id)

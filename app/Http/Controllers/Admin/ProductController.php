@@ -12,15 +12,12 @@ use Image;
 use File;
 
 use App\Models\Category;
-use App\Models\CategoryTranslation;
 use App\Models\Post;
-use App\Models\PostTranslation;
 use App\Models\Images;
-use App\Models\ProvinceTranslation;
-use App\Models\DistrictTranslation;
-use App\Models\WardTranslation;
+use App\Models\Province;
+use App\Models\District;
+use App\Models\Ward;
 use App\Models\Section;
-use App\Models\SectionTranslation;
 
 class ProductController extends Controller
 {
@@ -34,7 +31,6 @@ class ProductController extends Controller
         $posts = Post::where('sort_by', 'Product')->orderBy('id', 'DESC')->paginate(10);
         return view('admin.product.index', compact('posts'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -42,14 +38,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $locale = Session::get('locale');
-        $category = CategoryTranslation::join('categories', 'categories.id', '=', 'category_translations.category_id')
-            ->select('category_translations.*') 
-            ->where('sort_by', 'Product')
-            ->where('parent', '0')
-            ->where('locale', $locale)->orderBy('category_id', 'DESC')->get();
-        $province = ProvinceTranslation::where('locale', $locale)->get();
-        return view('admin.product.create')->with(compact('category', 'province'));
+        $category = Category::where('sort_by', 'Product')->get();
+        return view('admin.product.create')->with(compact('category'));
     }
     /**
      * Store a newly created resource in storage.

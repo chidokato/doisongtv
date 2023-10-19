@@ -80,10 +80,8 @@
                       <div class="form-group">
                           <label class="">Root</label>
                           <select name='parent' class="form-control select2">
-                            <option value="0">--Root--</option>
-                            @foreach($category as $cat)
-                            <option <?php if($data->parent==$cat->id){echo "selected";} ?> value="{{$cat->id}}">{{$cat->name}}</option>
-                            @endforeach
+                            <option value="0">-- ROOT --</option>
+                            <?php addeditcat ($category,0,$str='',$data['parent']); ?>
                           </select>
                       </div>
                   </div>
@@ -129,4 +127,21 @@
       </div>
 </div>
 </form>
+<?php 
+    function addeditcat ($data, $parent=0, $str='',$select=0)
+    {
+        foreach ($data as $value) {
+            if ($value['parent'] == $parent) {
+                if($select != 0 && $value['id'] == $select )
+                { ?>
+                    <option value="<?php echo $value['id']; ?>" selected> <?php echo $str.$value['name']; ?> </option>
+                <?php } else { ?>
+                    <option value="<?php echo $value['id']; ?>" > <?php echo $str.$value['name']; ?> </option>
+                <?php }
+                
+                addeditcat ($data, $value['id'], $str.'___',$select);
+            }
+        }
+    }
+?>
 @endsection

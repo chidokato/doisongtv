@@ -22,16 +22,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomeEnController;
 use App\Http\Controllers\HomeCnController;
 
-Route::get('/lang/{locale}', function ($locale) {
-    if (! in_array($locale, ['en', 'vi', 'cn'])) {
-        abort(400);
-    }
-    // echo App::setLocale($locale);
-    Session::put('locale', $locale);
-    return redirect()->back();
-    // ...
-});
-
 Route::get('admin', [LoginController::class, 'index'])->name('login');
 Route::post('admin', [LoginController::class, 'store']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
@@ -44,7 +34,7 @@ Route::group(['prefix'=>'ajax'],function(){
     Route::get('change_district/{id}', [AjaxController::class, 'change_district']);
     Route::get('change_district_lang/{id}', [AjaxController::class, 'change_district_lang']);
     Route::get('change_ward_lang/{id}', [AjaxController::class, 'change_ward_lang']);
-    Route::get('change_SortBy/{sort_by}', [AjaxController::class, 'change_SortBy']);
+    Route::get('change_SortBy/{id}', [AjaxController::class, 'change_SortBy']);
     Route::get('change_parent/{id}', [AjaxController::class, 'change_parent']);
     Route::get('update_category_view/{id}/{view}', [AjaxController::class, 'update_category_view']);
     Route::get('del_img_detail/{id}', [AjaxController::class, 'del_img_detail']);

@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col">
                     <nav class="navbar navbar-expand-lg nav-secondary nav-primary-hover nav-line-active">
-                        <a class="navbar-brand" href="{{asset('')}}"><img class="nav-logo" src="frontend/assets/img/logo_bg.png" alt="Image not found !"></a>
+                        <a class="navbar-brand" href="{{asset('')}}"><img class="nav-logo" src="frontend/assets/img/logo_bg.png" alt="logo indochine"></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon flaticon-menu flat-small text-primary"></span>
                           </button>
@@ -35,15 +35,15 @@
                                 <li class="nav-item dropdown lang_icon">
                                     <a class="nav-link dropdown-toggle" >
                                         <?php 
-                                            if(Session::get('locale')=='vi'){ echo "<img src='data/home/vn-1x.webp'> Vietnamese"; }
-                                            if(Session::get('locale')=='en'){ echo "<img src='data/home/gb-1x.webp'> English"; }
-                                            if(Session::get('locale')=='cn'){ echo "<img src='data/home/cn-1x.webp'> Chinese"; }
+                                            if(Session::get('locale')=='vi'){ echo "<img alt='languge vi' src='data/home/vn-1x.webp'> VI"; }
+                                            if(Session::get('locale')=='en'){ echo "<img alt='languge en' src='data/home/gb-1x.webp'> EN"; }
+                                            if(Session::get('locale')=='cn'){ echo "<img alt='languge cn' src='data/home/cn-1x.webp'> CN"; }
                                         ?>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{url('lang/vi')}}"> <img src="data/home/vn-1x.webp"> Vietnamese</a></li>
-                                        <li><a class="dropdown-item" href="{{url('lang/en')}}"> <img src="data/home/gb-1x.webp"> English</a></li>
-                                        <li><a class="dropdown-item" href="{{url('lang/cn')}}"> <img src="data/home/cn-1x.webp"> Chinese</a></li>
+                                        <li><a class="dropdown-item" href="{{url('lang/vi')}}"> <img alt="languge vi" src="data/home/vn-1x.webp"> VI</a></li>
+                                        <li><a class="dropdown-item" href="{{url('lang/en')}}"> <img alt="languge en" src="data/home/gb-1x.webp"> EN</a></li>
+                                        <li><a class="dropdown-item" href="{{url('lang/cn')}}"> <img alt="languge cn" src="data/home/cn-1x.webp"> CN</a></li>
                                     </ul>
                                 </li>
                             </ul>

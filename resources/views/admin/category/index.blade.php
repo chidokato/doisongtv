@@ -27,35 +27,17 @@
                                 <tr>
                                     <th></th>
                                     <th>Name</th>
-                                    <th>View</th>
                                     <th>Slug</th>
+                                    <th>View</th>
                                     <th>Sort By</th>
+                                    <th>Status</th>
+                                    <th>User</th>
                                     <th>date</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($category as $val)
-                                <tr id="category">
-                                    <input type="hidden" value="{{$val->id}}" name="id">
-                                    <td></td>
-                                    <td>
-                                        <a href="{{route('category.edit',[$val->id])}}">{{$val->name}}</a>
-                                    </td>
-                                    <td><input type="text" id="view" value="{{$val->view}}" name="" class="form-control cat_view"></td>
-                                    <td>{{$val->slug}}</td>
-                                    <td>{{$val->sort_by}}</td>
-                                    <td>{{$val->updated_at}}</td>
-                                    <td style="display: flex;">
-                                        <a href="{{route('category.edit',[$val->id])}}" class="mr-2"><i class="fas fa-edit" aria-hidden="true"></i></a>
-                                        <form action="{{route('category.destroy',[$val->id])}}" method="POST">
-                                          @method('DELETE')
-                                          @csrf
-                                          <button class="button_none" onclick="return confirm('xác nhận')"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                <?php dequycategory ($category,0,$str='',old('parent')); ?>  
                             </tbody>
                     </table>
                     @endif
@@ -64,4 +46,41 @@
         </div>
     </div>
 </div>
+
+<?php 
+    function dequycategory ($menulist, $parent=0, $str='')
+    {
+        foreach ($menulist as $val) 
+        {
+            if ($val['parent'] == $parent) 
+            { 
+                ?>
+                    <tr id="category" style="border-bottom: 1px solid #f3f6f9;">
+                        <input type="hidden" name="id" id="id" value="{{$val->id}}" >
+                        <!-- <td>
+                            <label class="container"><input type="checkbox" name="foo[]" value="{{$val->id}}"><span class="checkmark"></span></label>
+                        </td> -->
+                        <td>{!! isset($val->img) ? '<img data-action="zoom" src="data/category/'.$val->img.'" class="thumbnail-img align-self-end" alt="">' : '' !!}</td>
+                        <td><a href="{{route('category.edit',[$val->id])}}">{{$str}}{{$val->name}}</a></td>
+                        <td>{{$val->slug}}</td>
+                        <td><input type="text" id="view" value="{{$val->view}}" name="" class="form-control cat_view"></td>
+                        <td>{{$val->sort_by}}</td>
+                        <td>
+                            <label class="container"><input <?php if($val->status == 'true'){echo "checked";} ?> type="checkbox" id='home' ><span class="checkmark"></span></label>
+                        </td>
+                        <td>{{$val->user->name}}</td>
+                        <td class="date">{{date('d/m/Y',strtotime($val->created_at))}} <sup title="Sửa lần cuối: {{date('d/m/Y',strtotime($val->updated_at))}}"><i class="fa fa-question-circle-o" aria-hidden="true"></i></sup> </td>
+                        <td>
+                            <!-- <a href="admin/category/double/{{$val->id}}" class="mr-2"><i class="far fa-copy"></i></a> -->
+                            <a href="{{route('category.edit',[$val->id])}}" class="mr-3"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                            <a onclick="dell()" href="admin/category/delete/{{$val->id}}"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                <?php
+                dequycategory ($menulist, $val['id'], $str.'_');
+            }
+        }
+    }
+?>
+
 @endsection

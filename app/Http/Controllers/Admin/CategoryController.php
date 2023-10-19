@@ -30,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $category = Category::where('sort_by', 'Product')->where('parent', '0')->get();
+        $category = Category::where('sort_by', 'Product')->get();
         return view('admin.category.create', compact('category'));
     }
 
@@ -79,7 +79,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $data = Category::find($id);
-        $category = Category::where('sort_by', 'Product')->where('parent', '0')->get();
+        $category = Category::where('sort_by', 'Product')->get();
         return view('admin.category.edit', compact('data', 'category'));
     }
 

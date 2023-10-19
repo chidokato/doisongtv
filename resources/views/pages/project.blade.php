@@ -51,21 +51,21 @@
             <div class="col-lg-8 px-0">
                 <div id="sync1" class="slider owl-carousel">
                     <div class="item">
-                        <img src="data/product/{{$post->post->img}}" alt="real estate template">
+                        <img class="lazyload" data-src="data/product/{{$post->post->img}}" alt="real estate template">
                     </div>
                     @foreach($images as $val)
                     <div class="item">
-                        <img src="data/product/detail/{{$val->img}}" alt="real estate template">
+                        <img class="lazyload" data-src="data/product/detail/{{$val->img}}" alt="real estate template">
                     </div>
                     @endforeach
                 </div>
                 <div id="sync2" class="navigation-thumbs owl-carousel">
                     <div class="item">
-                        <img src="data/product/{{$post->post->img}}" alt="real estate template">
+                        <img class="lazyload" data-src="data/product/{{$post->post->img}}" alt="real estate template">
                     </div>
                     @foreach($images as $val)
                     <div class="item">
-                        <img src="data/product/detail/{{$val->img}}" alt="real estate template">
+                        <img class="lazyload" data-src="data/product/detail/{{$val->img}}" alt="real estate template">
                     </div>
                     @endforeach
                 </div>
@@ -106,7 +106,7 @@
             
         </ul>
         <ul>
-            <li><a class="hotline" href="tel:0977572947"><i class="fa fa-phone"></i> 0977 572 947</a></li>
+            <li><a class="hotline" href="tel:1800646428"><i class="fa fa-phone"></i> 1800.64.64.28</a></li>
         </ul>
     </div>
 </div>
@@ -128,13 +128,17 @@
                         @if(count($images) > 1)
                         <div class="owl-carousel owl-theme project_slider mt-3">
                             @foreach($images as $key => $img)
+                            @if($key==0)
                             <div class="item"><img src="data/product/detail/{{$img->img}}"></div>
+                            @else
+                            <div class="item"><img class="lazyload" data-src="data/product/detail/{{$img->img}}"></div>
+                            @endif
                             @endforeach
                         </div>
                         @else
                             @foreach($images as $key => $img)
                             <div class="mt-3">
-                                <img src="data/product/detail/{{$img->img}}">
+                                <img class="lazyload" data-src="data/product/detail/{{$img->img}}">
                             </div>
                             @endforeach
                         @endif
@@ -149,7 +153,7 @@
                     <ul>
                         @foreach($related_post as $val)
                         <li>
-                            <img src="data/product/{{$val->Post->img}}" alt="">
+                            <img class="lazyload" data-src="data/product/{{$val->Post->img}}" alt="">
                             <div class="thumb-body">
                                 <h6 class="listing-title line-1"><a href="property-single-1.html">{{$val->name}}</a></h6>
                                 <span class="listing-price"><small>Giá bán: </small> {{$val->price ? $val->price:'Liên hệ'}}</span>
@@ -167,7 +171,7 @@
                 <div class="widget widget_contact bg-white border p-30 shadow-one rounded mb-30 sicky-120">
                     <h5 class="mb-4">Quản lý dự án</h5>
                     <div class="media mb-3">
-                        <img class="rounded-circle me-3" src="frontend/assets/images/user1.jpg" alt="avata">
+                        <img class="rounded-circle me-3 lazyload" style="width: 100px" data-src="frontend/assets/img/avata-TGD.png" alt="avata">
                         <div class="media-body">
                             <div class="h6 pb-0 m-0">Hằng Lee</div>
                             <span>Hotline: 0916 442 096</span><br>

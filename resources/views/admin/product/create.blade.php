@@ -2,7 +2,7 @@
 
 @section('content')
 @include('admin.alert')
-<?php use App\Models\CategoryTranslation; ?>
+<?php use App\Models\Category; ?>
 <form method="post" action="{{route('product.store')}}" enctype="multipart/form-data">
 @csrf
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed">
@@ -27,39 +27,9 @@
 
 <div class="row">
   <div class="col-xl-9 col-lg-9">
-        <!-- <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Images</h6>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                          <div class="col-md-3">
-                              <div class="form-group">
-                                  <label>View</label>
-                                  <input name="view" placeholder="View" type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-3">
-                              <div class="form-group">
-                                  <label>Icon</label>
-                                  <input name="icon" placeholder="Icon" type="text" class="form-control">
-                              </div>
-                          </div>
-                          
-                          
-                      </div>
-            </div>
-
-        </div> -->
-
-    
         <div class="card shadow mb-2">
-            <div class="card-header d-flex flex-row align-items-center justify-content-between">
-                <ul class="nav nav-pills">
-                    <li><a data-toggle="tab" class="nav-link active" href="#vi">Tiếng Việt</a></li>
-                    <li><a data-toggle="tab" class="nav-link" href="#en">Tiếng Anh</a></li>
-                    <li><a data-toggle="tab" class="nav-link" href="#cn">Tiếng Trung</a></li>
-                </ul>
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Thông tin</h6>
             </div>
             <div class="tab-content overflow">
                 <div class="tab-pane active" id="vi">
@@ -68,110 +38,82 @@
                           <div class="col-md-12">
                               <div class="form-group">
                                   <label>Name</label>
-                                  <input name="name:vi" placeholder="..." type="text" class="form-control">
+                                  <input name="name" placeholder="..." type="text" class="form-control">
+                                  <input name="slug" placeholder="..." type="text" class="form-control slug">
                               </div>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <div class="form-group">
                                   <label>Address</label>
-                                  <input name="address:vi" placeholder="..." type="text" class="form-control">
+                                  <input name="address" placeholder="..." type="text" class="form-control">
                               </div>
                           </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label class="">Tỉnh Thành</label>
+                              <select name="province_id" class="form-control select2" id="province">
+                                <option value="">...</option>
+                                
+                              </select>
+                              <div id="list_province"></div>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                              <div class="form-group">
+                                <label class="">Quận/Huyện</label>
+                                <select name="" class="form-control select2" id="">
+                                  <option value="">...</option>
+                                  
+                                </select>
+                                <div id="list_province"></div>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                              <div class="form-group">
+                                <label class="">Phường/Xã</label>
+                                <select name="" class="form-control select2" id="">
+                                  <option value="">...</option>
+                                  
+                                </select>
+                                <div id="list_province"></div>
+                            </div>
+                          </div>
+
                           <div class="col-md-12">
                               <div class="form-group">
                                   <label>Tổng quan</label>
-                                  <textarea name="content:vi" class="form-control" id="ckeditor"></textarea>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Title</label>
-                                  <input name="title:vi" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Description</label>
-                                  <input name="description:vi" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="en">
-                  <div class="card-body">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Name</label>
-                                  <input name="name:en" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label>Address</label>
-                                  <input name="address:en" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Tổng quan</label>
-                                  <textarea name="content:en" class="form-control" id="ckeditor1"></textarea>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Title</label>
-                                  <input name="title:en" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Description</label>
-                                  <input name="description:en" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="cn">
-                  <div class="card-body">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Name</label>
-                                  <input name="name:cn" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label>Address</label>
-                                  <input name="address:cn" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Tổng quan</label>
-                                  <textarea name="content:cn" class="form-control" id="ckeditor2"></textarea>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Title</label>
-                                  <input name="title:cn" placeholder="..." type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Description</label>
-                                  <input name="description:cn" placeholder="..." type="text" class="form-control">
+                                  <textarea name="content" class="form-control" id="ckeditor"></textarea>
                               </div>
                           </div>
                       </div>
                   </div>
                 </div>
             </div>
-            
+        </div>
+        <div class="card shadow mb-2">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">SEO</h6>
+            </div>
+            <div class="tab-content overflow">
+                <div class="tab-pane active" id="vi">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                  <label>Title</label>
+                                  <input name="title" placeholder="..." type="text" class="form-control">
+                              </div>
+                          </div>
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                  <label>Description</label>
+                                  <input name="description" placeholder="..." type="text" class="form-control">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-xl-3 col-lg-3">
@@ -184,13 +126,7 @@
                     <label class="">Danh mục</label>
                     <select required="" name='parent' class="form-control select2" id="parent">
                       <option value="">--Chọn danh mục--</option>
-                      @foreach($category as $val)
-                      <option value="{{$val->category->id}}">{{$val->name}}</option>
-                      <?php $subs = CategoryTranslation::where('parent', $val->id)->get(); ?>
-                        @foreach($subs as $sub)
-                        <option value="{{$sub->category->id}}">--{{$sub->name}}</option>
-                        @endforeach
-                      @endforeach
+                      <?php addeditcat ($category,0,$str='',old('parent')); ?>
                     </select>
                     <div id="list_parent"></div>
                 </div>
@@ -207,40 +143,6 @@
             </div>
           </div>
 
-          <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Vị trí</h6>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label class="">Tỉnh Thành</label>
-                    <select name="province_id" class="form-control select2" id="province">
-                      <option value="">...</option>
-                      @foreach($province as $val)
-                      <option value="{{$val->province_id}}">{{$val->name}}</option>
-                      @endforeach
-                    </select>
-                    <div id="list_province"></div>
-                </div>
-
-                <div class="form-group">
-                    <label class="">Quận huyện</label>
-                    <select name="district_id" class="form-control select2" id="district">
-                      <option value="">...</option>
-                    </select>
-                    <div id="list_district"></div>
-                </div>
-
-                <div class="form-group">
-                    <label class="">Phường xã</label>
-                    <select required name="ward_id" class="form-control select2" id="ward">
-                      <option value="">...</option>
-                    </select>
-                    <div id="list_ward"></div>
-                </div>
-                
-            </div>
-          </div>
 
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -274,35 +176,59 @@
 </div>
 
 <div>
-  <input value="Tổng quan" type="hidden" name="name_section:vi[]" >
+  <input value="Tổng quan" type="hidden" name="name_section[]" >
   <input value="Overview" type="hidden" name="name_section:en[]">
   <input value="概述" type="hidden" name="name_section:cn[]">
 </div>
 
 <div>
-  <input value="Vị trí" type="hidden" name="name_section:vi[]" >
+  <input value="Vị trí" type="hidden" name="name_section[]" >
   <input value="Location" type="hidden" name="name_section:en[]">
   <input value="地點" type="hidden" name="name_section:cn[]">
 </div>
 
 <div>
-  <input value="Liên kết vùng" type="hidden" name="name_section:vi[]" >
+  <input value="Liên kết vùng" type="hidden" name="name_section[]" >
   <input value="Regional link" type="hidden" name="name_section:en[]">
   <input value="區域鏈接" type="hidden" name="name_section:cn[]">
 </div>
 
 <div>
-  <input value="Tiện ích" type="hidden" name="name_section:vi[]" >
+  <input value="Tiện ích" type="hidden" name="name_section[]" >
   <input value="Utilities" type="hidden" name="name_section:en[]">
   <input value="公用事業" type="hidden" name="name_section:cn[]">
 </div>
 
 <div>
-  <input value="Mặt bằng" type="hidden" name="name_section:vi[]" >
+  <input value="Mặt bằng" type="hidden" name="name_section[]" >
   <input value="Ground" type="hidden" name="name_section:en[]">
   <input value="地面" type="hidden" name="name_section:cn[]">
 </div>
 
 
 </form>
+
+<style type="text/css">
+  .slug{ border: none; border-radius: 0; padding: 0px; padding-left: 15px; height: 20px }
+  .slug:focus{ box-shadow: none; }
+</style>
+
+<?php 
+    function addeditcat ($data, $parent=0, $str='',$select=0)
+    {
+        foreach ($data as $value) {
+            if ($value['parent'] == $parent) {
+                if($select != 0 && $value['id'] == $select )
+                { ?>
+                    <option value="<?php echo $value['id']; ?>" selected> <?php echo $str.$value['name']; ?> </option>
+                <?php } else { ?>
+                    <option value="<?php echo $value['id']; ?>" > <?php echo $str.$value['name']; ?> </option>
+                <?php }
+                
+                addeditcat ($data, $value['id'], $str.'___',$select);
+            }
+        }
+    }
+?>
+
 @endsection
