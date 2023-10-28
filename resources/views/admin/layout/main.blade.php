@@ -63,22 +63,60 @@
         </div>
     </div>
 
-    <script src="ckeditor/ckeditor.js"></script>
-    <script type="text/javascript">
-        CKEDITOR.replace ('ckeditor' ,{
-            filebrowserBrowseUrl : 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
-            filebrowserUploadUrl : 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
-            filebrowserImageBrowseUrl : 'filemanager/dialog.php?type=1&editor=ckeditor&fldr='
-        });
+    <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+    <script>
+    var options = {
+        filebrowserImageBrowseUrl: 'laravel-filemanager?type=Images',
+        filebrowserImageUploadUrl: 'laravel-filemanager/upload?type=Images&_token=',
+        filebrowserBrowseUrl: 'laravel-filemanager?type=Files',
+        filebrowserUploadUrl: 'laravel-filemanager/upload?type=Files&_token=',
+        height: 450, 
+        toolbar: [{
+          name: 'document',
+          items: ['Source']
+        },
+        {
+          name: 'clipboard',
+          items: ['Undo', 'Redo']
+        },
+        {
+          name: 'styles',
+          items: ['Format', 'Font', 'FontSize']
+        },
+        {
+          name: 'colors',
+          items: ['TextColor', 'BGColor']
+        },
+        {
+          name: 'align',
+          items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+        },
+        {
+          name: 'basicstyles',
+          items: ['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', 'Strike', 'RemoveFormat']
+        },
+        {
+          name: 'links',
+          items: ['Link', 'Unlink']
+        },
+        {
+          name: 'paragraph',
+          items: ['NumberedList', 'BulletedList', '-', 'Blockquote']
+        },
+        {
+          name: 'insert',
+          items: ['Image', 'Table']
+        },
         
+        
+      ],
+    };
+    </script>
+    <script>
+        CKEDITOR.replace('ckeditor', options);
         @for ($i = 1; $i <= 10; $i++)
-            CKEDITOR.replace ('ckeditor{{$i}}' ,{
-                filebrowserBrowseUrl : 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
-                filebrowserUploadUrl : 'filemanager/dialog.php?type=2&editor=ckeditor&fldr=',
-                filebrowserImageBrowseUrl : 'filemanager/dialog.php?type=1&editor=ckeditor&fldr='
-            });
+            CKEDITOR.replace('ckeditor{{$i}}', options);
         @endfor
-        
     </script>
     
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

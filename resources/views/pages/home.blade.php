@@ -11,7 +11,7 @@
         <div class="item"><img alt="slide" src="https://datxanhindochine.com/data/home/z4537714783472_5c013a91df8d09e821e0f37d8c9e9f4f.jpg"></div>
     </div>
 
-    <div class="container">
+    <div class="container"> 
         <div class="row">
             <div class="col">
                 <form class="banner-search-form shadow-sm bg-white mb-3 quick-search form-icon-right position-relative" action="#" method="post" style="margin-top: -130px; z-index: 1">

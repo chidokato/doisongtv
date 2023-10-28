@@ -22,6 +22,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomeEnController;
 use App\Http\Controllers\HomeCnController;
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+     \UniSharp\LaravelFilemanager\Lfm::routes();
+ });
+
 Route::get('admin', [LoginController::class, 'index'])->name('login');
 Route::post('admin', [LoginController::class, 'store']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');

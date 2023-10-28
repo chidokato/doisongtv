@@ -64,7 +64,6 @@
                                   <label>Họ & Tên</label>
                                   <input name="yourname" placeholder="..." type="text" class="form-control">
                               </div>
-                              
                               <div class="form-group">
                                   <label>Địa chỉ</label>
                                   <input name="address" placeholder="..." type="text" class="form-control">

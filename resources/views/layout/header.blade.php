@@ -2,7 +2,7 @@
 <!--============== Header Section Start ==============-->
 <header class="header-style-1 nav-on-banner fixed-bg-secondary">
     <div class="main-nav">
-        <div class="container">
+        <div class="container"> 
             <div class="row">
                 <div class="col">
                     <nav class="navbar navbar-expand-lg nav-white nav-primary-hover nav-line-active">

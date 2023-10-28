@@ -65,9 +65,6 @@
 </head>
 
 <body>
-    <div class="preloader">
-        <div class="loader xy-center"></div>
-    </div>
     <div id="page_wrapper" class="bg-white">
         @include('layout.header')
         @yield('content')
